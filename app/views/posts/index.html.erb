@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Posts</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <%= render post %>
+    <p>
+      <%= link_to "Show this post", post %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New post", new_post_path if @current_user.present? %>
+<%= link_to "New post DISABLED ^_^", new_post_path unless @current_user.present? %>
+
+<br/>
+<% if @current_user.present? %>
+  <h5><%= @current_user.email %> currently logged in
+  <br/>
+  <%#= button_to "logout", login_destroy_path, method: :delete  %>
+  <%= link_to "log out", logout_path %>
+  </h5>
+<% else %>
+  <h5>no user logged in -
+  <%= link_to " please, log in", new_login_path %>
+  </h5>
+<% end %>
